@@ -1,18 +1,22 @@
-const fs = require('fs');
-var notes=require('./notes')
-var _=require('lodash');
-const os=require('os');
-var user=os.userInfo();
+const express = require('express');
+const app = express();
 
-var age=notes.age;
-console.log( "age is"+age);
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
 
-var result=notes.addNumber(2,4);
-console.log(result);
+app.get('/chicken', function(req, res) {
+    res.send('I love chicken');
+});
 
-console.log(user.username);
-
-fs.appendFile('file.txt','welcome\t'+user.username+'!\n',()=>{console.log("file is open")});
-const data=[1,1,22,3,4,5,5,6,11,11,34];
-var filter=_.uniq(data);
-console.log(filter);
+app.get('/idli',function(req,res){
+    var customised_idli={
+        name:'idli',
+        is_sambhar:true,
+        is_coconut_chutney:true
+    }
+    res.send(customised_idli);
+})
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
